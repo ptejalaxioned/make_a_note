@@ -1,0 +1,29 @@
+body{
+    padding: 0;
+    margin: 0;
+    background-color:#70d5f1;
+}
+
+.add-note{
+    padding: 30px;
+    display: flex;
+    justify-content: end; 
+}
+button{
+    padding:5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color:#94c158;
+    color: aliceblue;
+    font-size:15px ;
+    font-weight: 600;
+}
+
+span::before{
+    content: "\2b";
+    padding-right: 2px;
+    font-family: "FontAwesome";
+    font-size: 12px;
+}
+
+
