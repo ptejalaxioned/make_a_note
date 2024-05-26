@@ -1,146 +1,147 @@
-var button = document.querySelector("button");
-var parentDiv = document.querySelector(".wrapper");
-var noteContent=""
-  let  paraContent=""
-
-button.addEventListener("click", function (event) {
-  console.log(event.target);
-});
-
-var abc = document.querySelector(".wrapper");
-var childCount = abc.children.length;
-var countNote = 0;
+let button = document.querySelector('button');
+let parentDiv = document.querySelector('.wrapper');
+let childCount = parentDiv.children.length;
+let countNote = 0;
 
 function createNote() {
-  // console.log(countNote+1)
-  if (abc.children.length == childCount) {
+  if (parentDiv.children.length == childCount) {
     // note-area Class Created here
-    var note_area = document.createElement("div");
-    note_area.classList.add("note-area");
+    let note_area = document.createElement('div');
+    note_area.classList.add('note-area');
     parentDiv.appendChild(note_area);
+
     //style
-    note_area.style.padding = "20px 2%";
-    note_area.style.display = "flex";
-    // note_area.style.justifyContent="space-between"
-    note_area.style.gap = "24px";
-    note_area.style.flexWrap = "wrap";
+    note_area.style.padding = '20px 2%';
+    note_area.style.display = 'flex';
+    note_area.style.gap = '24px';
+    note_area.style.flexWrap = 'wrap';
+
     addNote(note_area);
   } else {
-    var note_area = parentDiv.children[1];
+    let note_area = parentDiv.children[1];
     addNote(note_area);
   }
 }
 
 // Add note function
-
 function addNote(note_area) {
+  let noteContent = '';
+  let paraContent = '';
+
   // note Class Created here
-  var note = document.createElement("div");
-  note.classList.add("note");
-  var idName = `${note_area.children.length + 1}`;
-  note.setAttribute("id", idName);
+  let note = document.createElement('div');
+  note.classList.add('note');
+  let idName = `${note_area.children.length + 1}`;
+  note.setAttribute('id', idName);
   console.log(idName);
   note_area.appendChild(note);
-
   //style
-  note.style.width = "23.5%";
-  note.style.display = "flex";
-  note.style.flexDirection = "column";
+  note.style.width = '23.5%';
+  note.style.display = 'flex';
+  note.style.flexDirection = 'column';
 
   // noteup and notedown Class Created here
-  var note_up = document.createElement("div");
-  var note_down = document.createElement("div");
-  note_up.classList.add("noteup");
-  note_down.classList.add("notedown");
+  let note_up = document.createElement('div');
+  let note_down = document.createElement('div');
+  note_up.classList.add('noteup');
+  note_down.classList.add('notedown');
   note.append(note_up, note_down);
   //style noteup
-  note_up.style.padding = "5px 10px";
-  note_up.style.display = "flex";
-  note_up.style.justifyContent = "end";
-  note_up.style.backgroundColor = "#94c158";
-  note_up.style.gap = "10px";
+  note_up.style.padding = '5px 10px';
+  note_up.style.display = 'flex';
+  note_up.style.justifyContent = 'end';
+  note_up.style.backgroundColor = '#94c158';
+  note_up.style.gap = '10px';
   //style notedown
-  note_down.style.height = "40vh";
-  note_down.style.padding = "20px";
-  note_down.style.backgroundColor = "white";
+  note_down.style.height = '50vh';
+  note_down.style.padding = '20px';
+  note_down.style.backgroundColor = 'white';
 
+  let textarea = document.createElement('textarea');
+  // textarea.classList.add('text');
+  note_down.appendChild(textarea);
+  textarea.style.display = 'block';
+  textarea.style.border = 'none';
+  textarea.style.resize = 'none';
+  textarea.style.outline = 'none';
+  textarea.style.width = '100%';
+  textarea.style.height = '100%';
 
-  var textarea= document.createElement("textarea");
-  note_down.appendChild(textarea)
-  textarea.style.display="none"
-  textarea.style.border="none"
-  textarea.style.resize="none"
-  textarea.style.outline="none"
-  console.log(note_down)
-  
   // two anchor tag inside noteup Class Created here
-  var edit = document.createElement("a");
-  var remove = document.createElement("a");
-  edit.classList.add("edit");
-  remove.classList.add("remove");
+  let edit = document.createElement('a');
+  let remove = document.createElement('a');
+  edit.classList.toggle('save');
+  remove.classList.add('remove');
   note_up.append(edit, remove);
-  edit.innerHTML = "edit";
-  remove.innerHTML = "remove";
+  edit.innerHTML = 'edit';
+  remove.innerHTML = 'remove';
   //style edit class
-  edit.style.content = "\f044";
+  edit.style.content = '\f044';
   //style remove class
-  remove.style.content = "\f1f8 ";
+  remove.style.content = '\f1f8 ';
 
   // Delete notes
-  remove.addEventListener("click", function (e) {
-    var noteId=document.getElementById(e.target.parentNode.parentNode.id)
-    // e.target.parentNode.parentNode.remove();
+  remove.addEventListener('click', function (e) {
+    let noteId = document.getElementById(e.target.parentNode.parentNode.id);
     noteId.remove();
   });
 
-  
   //Save notes
-  edit.addEventListener("click", function (e) {
+  edit.addEventListener('click', function (e) {
+    let noteId = document.getElementById(e.target.parentNode.parentNode.id);
 
-    var noteId=document.getElementById(e.target.parentNode.parentNode.id)
-    if(para.style.display="block"){
-    paraContent=paraContent+editNote(textarea,para,noteContent)
-    console.log("paraContent"+" "+textarea.style.display)
+    let textarea1 = noteId.children[1].children[0];
+    let para1 = noteId.children[1].children[1].children[0];
+
+    let note_down_heigth = noteId.children[1];
+    console.log(note_down_heigth);
+
+    if (e.target.className == 'save') {
+      edit.classList.toggle('save');
+      edit.classList.add('edit');
+      note_down_heigth.style.height = '40vh';
+      noteContent = textarea1.value;
+      paraContent = saveNote(textarea1, para1, noteContent);
+    } else {
+      edit.classList.toggle('edit');
+      edit.classList.add('save');
+      paraContent = editNote(textarea1, para1, paraContent);
+      note_down_heigth.style.height = '50vh';
     }
+  });
 
-   else if (textarea.style.display="block"){
-      // saveNote(textarea,para ,paraContent)
-      console.log("paraContent"+" "+textarea.style.display)
-   } 
-  
-  
-    })
-    
-
-  var anchor = document.querySelectorAll("a");
-  for (var i = 0; i < anchor.length; i++) {
-    anchor[i].style.float = "left";
-    anchor[i].style.textIndent = "-9999px";
+  let anchor = document.querySelectorAll('a');
+  for (let i = 0; i < anchor.length; i++) {
+    anchor[i].style.float = 'left';
+    anchor[i].style.textIndent = '-9999px';
   }
 
   // tags inside notedown Class Created here
-  var para = document.createElement("p");
-  para.classList.add("para");
-  note_down.appendChild(para);
+  let para = document.createElement('p');
+  let paraDiv = document.createElement('div');
+  // para.classList.add('para');
+  paraDiv.classList.add('paraDiv');
+  note_down.appendChild(paraDiv);
+  paraDiv.appendChild(para);
   //style
-  para.style.margin = "0";
-  para.style.fontSize = "13px";
-  para.style.fontWeight = "500";
-
+  paraDiv.style.width = '100%';
+  para.style.margin = '0';
+  para.style.fontSize = '15px';
+  para.style.fontWeight = '500';
+  para.style.overflow = 'hidden';
+  para.style.wordWrap = 'break-word';
 }
 
-
-function saveNote(textarea,para ,paraContent)
-{
-  para.style.display="block"
-  textarea.style.display="none"
-  return paraContent;
+function saveNote(textarea1, para1, noteContent) {
+  para1.style.display = 'block';
+  para1.innerHTML = noteContent;
+  textarea1.style.display = 'none';
+  return para1.innerHTML;
 }
 
-function editNote(textarea,para,noteContent)
-{
-  textarea.style.display="block"
-  para.style.display="none"
-  para.innerHTML=noteContent+textarea.value
-  return para.innerHTML;
+function editNote(textarea1, para1, paraContent) {
+  para1.style.display = 'none';
+  textarea1.style.display = 'block';
+  textarea1.value = paraContent;
+  return textarea1.value;
 }

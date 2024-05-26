@@ -1,41 +1,81 @@
-body{
-    padding: 0;
-    margin: 0;
-    background-color:#70d5f1;
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #70d5f1;
 }
 
-.add-note{
-    padding: 30px;
-    display: flex;
-    justify-content: end; 
+.add-note {
+  padding: 30px;
+  display: flex;
+  justify-content: end;
 }
-button{
-    padding:5px 10px;
-    border: none;
-    border-radius: 5px;
-    background-color:#94c158;
-    color: aliceblue;
-    font-size:15px ;
-    font-weight: 600;
+button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #94c158;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
 }
 
-.note-span::before{
-    content: "\2b";
-    padding-right: 2px;
-    font-family: "FontAwesome";
-    font-size: 12px;
+.note_area {
+  padding: 20px 2%;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
 }
-.edit::before{
-    content: "\f044";
+
+.note {
+  width: 23.5%;
+  display: flex;
+  flex-direction: column;
 }
-.remove::before{
-    content: "\f1f8 ";
+
+.note_up {
+  padding: 5px 10px;
+  display: flex;
+  justify-content: end;
+  background-color: #94c158;
+  gap: 10px;
+}
+
+.note_down {
+  height: 40vh;
+  padding: 20px;
+  background-color: white;
+}
+
+.note-span::before {
+  content: '\2b';
+  padding-right: 2px;
+  font-family: 'FontAwesome';
+  font-size: 12px;
+}
+
+.edit::before {
+  content: '\f044';
+}
+
+.save::before {
+  content: '\f0c7';
+}
+
+.remove::before {
+  content: '\f1f8 ';
+}
+
+a {
+  float: left;
+  text-indent: -9999px;
 }
 
 a::before {
-    font-family: "FontAwesome";
-    font-size: 13px;
-    float: right;
-    text-indent: 0;
-    color: white;
-  }
+  color: #fff;
+  font-family: 'FontAwesome';
+  font-size: 13px;
+  float: right;
+  text-indent: 0;
+}
+
+/* f0c7 */
